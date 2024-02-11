@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "700",
     transform: [{ rotate: "-10deg" }],
-    marginTop: -80,
+    marginTop: -150,
     marginBottom: 50,
   },
   bottom: {
