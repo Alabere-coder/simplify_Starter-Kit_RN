@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   logo: {
-    fontSize: 40,
+    fontSize: 45,
     fontWeight: "700",
     transform: [{ rotate: "-10deg" }],
     marginTop: -150,

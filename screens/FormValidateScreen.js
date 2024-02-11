@@ -1,4 +1,6 @@
 import {
+  Animated,
+  Easing,
   StyleSheet,
   Text,
   TextInput,
@@ -7,7 +9,7 @@ import {
   Vibration,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,6 +21,16 @@ const FormValidateScreen = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const contentScale = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.timing(contentScale, {
+      toValue: 1, // Zoom in to full size
+      duration: 500, // Animation duration
+      easing: Easing.ease,
+      useNativeDriver: true, // Add this line for better performance
+    }).start();
+  }, []);
 
   const validateForm = () => {
     let errors = {};
@@ -26,7 +38,7 @@ const FormValidateScreen = () => {
     // Validate name field
     if (!name) {
       errors.name = "Name is required.";
-    } else if (name.length < 4) {
+    } else if (name.length < 3) {
       errors.name = "Name Cannot be less than 4 characters";
       Vibration.vibrate();
     }
@@ -53,7 +65,7 @@ const FormValidateScreen = () => {
     } else if (password2.length < 6) {
       errors.password2 = "Password must be at least 6 characters.";
     } else if (password2 !== password) {
-      errors.password = "Passwords do not match";
+      errors.password2 = "Passwords do not match";
       Vibration.vibrate(); // Vibrate the device
     }
 
@@ -86,7 +98,18 @@ const FormValidateScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[
+        styles.container,
+        {
+          transform: [
+            {
+              scale: contentScale,
+            },
+          ],
+        },
+      ]}
+    >
       <View style={styles.elevation}>
         <TextInput
           style={styles.input}
@@ -149,7 +172,7 @@ const FormValidateScreen = () => {
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -157,8 +180,11 @@ export default FormValidateScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
-    // justifyContent: "center",
+    flex: 1,
+    marginTop: -20,
+    paddingHorizontal: 20,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
   },
   input: {
     height: 50,
@@ -185,14 +211,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   eyeIcon: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   button: {
     backgroundColor: "black",
     borderRadius: 8,
     paddingVertical: 10,
     alignItems: "center",
-    marginTop: 16,
+    marginTop: 26,
     marginBottom: 12,
   },
   buttonText: {
@@ -211,9 +237,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   elevation: {
-    borderWidth: 1,
-    padding: 8,
+    backgroundColor: "white",
+    padding: 20,
     borderRadius: 10,
-    paddingTop: 20,
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.25,
+    elevation: 12,
   },
 });
