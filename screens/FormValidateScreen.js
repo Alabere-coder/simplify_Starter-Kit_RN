@@ -1,15 +1,15 @@
 import {
   Animated,
   Easing,
+  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
-  TouchableOpacity,
   Vibration,
   View,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -111,15 +111,8 @@ const FormValidateScreen = () => {
       ]}
     >
       <View style={styles.elevation}>
-        <TextInput
-          style={styles.input}
-          placeholder="Name"
-          value={name}
-          onChangeText={setName}
-        />
-        {errors.name ? (
-          <Text style={styles.error__message}>{errors.name}</Text>
-        ) : null}
+        <Image source={require("../assets/man.png")} style={styles.image} />
+        <Text>Email</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -141,7 +134,11 @@ const FormValidateScreen = () => {
             style={styles.eyeIcon}
             onPress={togglePasswordVisibility}
           >
-            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+            <FontAwesomeIcon
+              size={20}
+              color="royalblue"
+              icon={showPassword ? faEye : faEyeSlash}
+            />
           </TouchableHighlight>
         </View>
         {errors.password ? (
@@ -159,16 +156,17 @@ const FormValidateScreen = () => {
             style={styles.eyeIcon}
             onPress={togglePassword2Visibility}
           >
-            <FontAwesomeIcon icon={showPassword2 ? faEye : faEyeSlash} />
+            <FontAwesomeIcon
+              size={20}
+              color="royalblue"
+              icon={showPassword2 ? faEye : faEyeSlash}
+            />
           </TouchableHighlight>
         </View>
         {errors.password2 ? (
           <Text style={styles.error__message}>{errors.password2}</Text>
         ) : null}
-        <TouchableHighlight
-          style={[styles.button, styles.btn3]}
-          onPress={handleSubmit}
-        >
+        <TouchableHighlight style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableHighlight>
       </View>
@@ -180,15 +178,23 @@ export default FormValidateScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: -20,
+    flex: 2,
     paddingHorizontal: 20,
     backgroundColor: "#f5f5f5",
     justifyContent: "center",
   },
+  link__btn: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  btn: {
+    backgroundColor: "maroon",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+  },
   input: {
     height: 50,
-    borderColor: "#ccc",
+    borderColor: "royalblue",
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
@@ -204,17 +210,18 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     height: 50,
-    borderColor: "#ccc",
+    borderColor: "royalblue",
     borderWidth: 1,
     borderRadius: 8,
     fontSize: 16,
     paddingHorizontal: 10,
   },
   eyeIcon: {
-    paddingHorizontal: 5,
+    padding: 5,
+    color: "mediumblue",
   },
   button: {
-    backgroundColor: "black",
+    backgroundColor: "mediumblue",
     borderRadius: 8,
     paddingVertical: 10,
     alignItems: "center",
@@ -247,5 +254,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     elevation: 12,
+  },
+  design: {
+    backgroundColor: "black",
+  },
+  image: {
+    width: 150,
+    height: 150,
+    alignSelf: "center",
+    marginBottom: 10,
   },
 });
