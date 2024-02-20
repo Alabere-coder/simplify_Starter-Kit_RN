@@ -8,6 +8,7 @@ import AboutScreen from "./screens/AboutScreen";
 import FormValidateScreen from "./screens/FormValidateScreen";
 import IntroScreen from "./screens/form/IntroScreen";
 import OTPInput from "./screens/OtpInput";
+import SearchFilter from "./screens/SearchFilter";
 
 // const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,6 +23,11 @@ export default function App() {
           options={{ title: "Welcome to Simplify Dashboard" }}
         />
         <Drawer.Screen
+          name="Introduction"
+          component={IntroScreen}
+          options={{ title: "Overview" }}
+        />
+        <Drawer.Screen
           name="About"
           component={AboutScreen}
           options={{ title: "Components Overview" }}
@@ -31,20 +37,16 @@ export default function App() {
           component={FormValidateScreen}
           options={{ title: "Form Validation" }}
         />
-        <Drawer.Screen
-          name="Introduction"
-          component={IntroScreen}
-          options={{ title: "Overview" }}
-        />
-        {/* <Drawer.Screen
-          name="Tabpage"
-          component={FornScreen}
-          options={{ title: "Tab Navigation" }}
-        /> */}
+
         <Drawer.Screen
           name="OTP"
           component={OTPInput}
           options={{ title: "OTP Screen Display" }}
+        />
+        <Drawer.Screen
+          name="Search"
+          component={SearchFilter}
+          options={{ title: "Search Bar" }}
         />
       </Drawer.Navigator>
     </NavigationContainer>

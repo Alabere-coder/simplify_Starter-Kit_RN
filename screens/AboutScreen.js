@@ -13,10 +13,9 @@ const AboutScreen = ({ navigation }) => {
   return (
     <ScrollView
       style={{
-        backgroundColor: "#1f1f38",
+        backgroundColor: "#fff",
       }}
     >
-      {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
       <SafeAreaView
         style={{
           flex: 1,
@@ -33,9 +32,9 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Introduction")}
             >
-              <Text style={styles.btn__txt}>1</Text>
+              <Text style={styles.btn__txt}>Page Intro</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>1</Text>
           </View>
 
           <View style={styles.card}>
@@ -43,9 +42,9 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Form")}
             >
-              <Text style={styles.btn__txt}>2</Text>
+              <Text style={styles.btn__txt}>Form Validation</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>2</Text>
           </View>
         </View>
 
@@ -55,19 +54,19 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("OTP")}
             >
-              <Text style={styles.btn__txt}>3</Text>
+              <Text style={styles.btn__txt}>OTP</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>OTP</Text>
+            <Text style={styles.card__txt}>3</Text>
           </View>
 
           <View style={styles.card}>
             <TouchableHighlight
               style={styles.btn}
-              onPress={() => navigation.navigate("Form")}
+              onPress={() => navigation.navigate("Search")}
             >
-              <Text style={styles.btn__txt}>4</Text>
+              <Text style={styles.btn__txt}>Search Bar</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>4</Text>
           </View>
         </View>
 
@@ -77,9 +76,9 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Form")}
             >
-              <Text style={styles.btn__txt}>5</Text>
+              <Text style={styles.btn__txt}>Form Validation</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>5</Text>
           </View>
 
           <View style={styles.card}>
@@ -87,9 +86,9 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Form")}
             >
-              <Text style={styles.btn__txt}>6</Text>
+              <Text style={styles.btn__txt}>Form Validation</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>6</Text>
           </View>
         </View>
 
@@ -99,9 +98,9 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Tabpage")}
             >
-              <Text style={styles.btn__txt}>7</Text>
+              <Text style={styles.btn__txt}>Form Validation</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>7</Text>
           </View>
 
           <View style={styles.card}>
@@ -109,14 +108,13 @@ const AboutScreen = ({ navigation }) => {
               style={styles.btn}
               onPress={() => navigation.navigate("Tabpage")}
             >
-              <Text style={styles.btn__txt}>8</Text>
+              <Text style={styles.btn__txt}>Form Validation</Text>
             </TouchableHighlight>
-            <Text style={styles.card__txt}>Form Validation</Text>
+            <Text style={styles.card__txt}>8</Text>
           </View>
         </View>
         <StatusBar style="auto" />
       </SafeAreaView>
-      {/* </ImageBackground> */}
     </ScrollView>
   );
 };
@@ -136,15 +134,16 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     color: "white",
     paddingTop: 14,
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "700",
+    marginHorizontal: 8,
   },
   card: {
     width: "45%",
     height: 140,
-    backgroundColor: "#4db5ff",
+    backgroundColor: "#fff",
     borderRadius: 12,
-    borderColor: "#4db5ff",
+    borderColor: "#2c2c6c",
     borderWidth: 2,
     margin: 4,
     // shadowColor: "#000",
@@ -158,11 +157,11 @@ const styles = StyleSheet.create({
   },
 
   btn__txt: {
-    backgroundColor: "#4db5ff",
-    fontSize: 28,
+    backgroundColor: "#fff",
+    fontSize: 16,
     textAlign: "center",
     paddingVertical: 18,
-    color: "#fff",
+    color: "#2c2c6c",
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },

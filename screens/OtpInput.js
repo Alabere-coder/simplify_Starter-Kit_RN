@@ -78,7 +78,7 @@ const OTPInput = ({ length = 4, onComplete }) => {
       <View style={styles.top}>
         <View style={styles.icon__bg2}>
           <View style={styles.icon__bg}>
-            <Ionicons name="lock-open" size={110} color="indigo" />
+            <Ionicons name="lock-open" size={110} color="white" />
           </View>
         </View>
         <Text style={styles.title}>Account Verification</Text>
@@ -124,7 +124,7 @@ const OTPInput = ({ length = 4, onComplete }) => {
         disabled={!isValid}
         style={[
           styles.verifyButton,
-          { backgroundColor: isValid ? "blue" : "grey" },
+          { backgroundColor: isValid ? "#2c2c6c" : "grey" },
         ]}
       >
         <Text style={styles.txtButton}>Verify OTP</Text>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   icon__bg: {
     width: 190,
     height: 190,
-    backgroundColor: "deepskyblue",
+    backgroundColor: "#2c2c6c",
     borderRadius: 250,
     justifyContent: "center",
     alignItems: "center",
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     width: 220,
     height: 220,
     borderWidth: 8,
-    borderColor: "deepskyblue",
+    borderColor: "#2c2c6c",
     borderRadius: 250,
     justifyContent: "center",
     alignItems: "center",

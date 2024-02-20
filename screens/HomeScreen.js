@@ -5,10 +5,13 @@ import {
   Text,
   TouchableHighlight,
   View,
+  useColorScheme,
 } from "react-native";
 import React from "react";
 
 const HomeScreen = ({ navigation }) => {
+  const theme = theme === "dark";
+
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Simplify</Text>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   btn__txt: {
-    backgroundColor: "black",
+    backgroundColor: "#2c2c6c",
     textAlign: "center",
     paddingVertical: 15,
     color: "#fff",

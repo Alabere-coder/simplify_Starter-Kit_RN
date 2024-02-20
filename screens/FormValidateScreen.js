@@ -136,7 +136,7 @@ const FormValidateScreen = () => {
           >
             <FontAwesomeIcon
               size={20}
-              color="royalblue"
+              color="#2c2c6c"
               icon={showPassword ? faEye : faEyeSlash}
             />
           </TouchableHighlight>
@@ -158,7 +158,7 @@ const FormValidateScreen = () => {
           >
             <FontAwesomeIcon
               size={20}
-              color="royalblue"
+              color="#2c2c6c"
               icon={showPassword2 ? faEye : faEyeSlash}
             />
           </TouchableHighlight>
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    borderColor: "royalblue",
+    borderColor: "#2c2c6c",
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     height: 50,
-    borderColor: "royalblue",
+    borderColor: "#2c2c6c",
     borderWidth: 1,
     borderRadius: 8,
     fontSize: 16,
@@ -218,10 +218,10 @@ const styles = StyleSheet.create({
   },
   eyeIcon: {
     padding: 5,
-    color: "mediumblue",
+    color: "#2c2c6c",
   },
   button: {
-    backgroundColor: "mediumblue",
+    backgroundColor: "#2c2c6c",
     borderRadius: 8,
     paddingVertical: 10,
     alignItems: "center",
