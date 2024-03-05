@@ -5,6 +5,9 @@ import {
   Text,
   TextInput,
   View,
+  Modal,
+  TouchableOpacity,
+  Animated,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
@@ -16,6 +19,25 @@ const SearchFilter = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const animatedWidth = useState(new Animated.Value(200))[0];
+
+  const handleFocus = () => {
+    Animated.timing(animatedWidth, {
+      toValue: 300,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleBlur = () => {
+    Animated.timing(animatedWidth, {
+      toValue: 300,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +46,7 @@ const SearchFilter = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://randomuser.me/api/?results=100");
+      const response = await fetch("https://randomuser.me/api/?results=20");
       const json = await response.json();
       const sortedData = json.results.sort((a, b) => {
         const nameA = `${a.name.first} ${a.name.last}`.toLowerCase();
@@ -36,8 +58,6 @@ const SearchFilter = () => {
       setData(sortedData);
       setFilteredData(sortedData);
       setLoading(false);
-
-      //   console.log(json.results);
     } catch (error) {
       setError(error);
       console.error("Error fetching data:", error);
@@ -47,8 +67,6 @@ const SearchFilter = () => {
 
   const handleSearch = (query) => {
     setSearch(query);
-    // console.log(query);
-
     const filtered = data.filter((user) => {
       const fullName = `${user.name.first} ${user.name.last}`.toLowerCase();
       return fullName.includes(query.toLowerCase());
@@ -56,58 +74,83 @@ const SearchFilter = () => {
     setFilteredData(filtered);
   };
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size={60} color="#0000ff" />
-      </View>
-    );
-  }
+  const handleUserPress = (user) => {
+    setSelectedUser(user);
+  };
 
-  if (error) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Data Could not be fetched...</Text>
-        <Text>Please try again or check internet connection</Text>
-      </View>
-    );
-  }
+  const closeModal = () => {
+    setSelectedUser(null);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.input__container}>
-        <Text style={styles.label}>Find User By Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Text to Search"
-          clearButtonMode="always"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={search}
-          onChangeText={(query) => handleSearch(query)}
-        />
+        <Animated.View style={{ width: animatedWidth }}>
+          <Text style={styles.label}>Find User By Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Text to Search"
+            clearButtonMode="always"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={search}
+            onChangeText={(query) => handleSearch(query)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+        </Animated.View>
       </View>
 
       <FlatList
         paddingHorizontal={20}
         data={filteredData}
-        // keyExtractor={(item) => item.login.username}
         keyExtractor={(item) => item.login.uuid}
         renderItem={({ item }) => (
-          <View style={styles.item__container}>
-            <Image
-              source={{ uri: item.picture.thumbnail }}
-              style={styles.img}
-            />
-            <View style={styles.info}>
-              <Text style={styles.name}>
-                {item.name.first} {item.name.last}
-              </Text>
-              <Text style={styles.email}>{item.email}</Text>
+          <TouchableOpacity onPress={() => handleUserPress(item)}>
+            <View style={styles.item__container}>
+              <Image
+                source={{ uri: item.picture.thumbnail }}
+                style={styles.img}
+              />
+              <View style={styles.info}>
+                <Text style={styles.name}>
+                  {item.name.first} {item.name.last}
+                </Text>
+                <Text style={styles.email}>{item.email}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={!!selectedUser}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          {selectedUser && (
+            <View style={styles.modalContent}>
+              <Image
+                source={{ uri: selectedUser.picture.thumbnail }}
+                style={styles.modalImg}
+              />
+              <Text style={styles.modalName}>
+                {selectedUser.name.first} {selectedUser.name.last}
+              </Text>
+              <Text style={styles.modalLocation}>
+                {selectedUser.location.city}, {selectedUser.location.state} .
+                {selectedUser.location.country}.
+              </Text>
+              <Text style={styles.modalEmail}>{selectedUser.email}</Text>
+              <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -135,7 +178,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     color: "#333",
-    marginBottom: 20,
+    marginBottom: 10,
     backgroundColor: "#f8f8f8",
   },
   item__container: {
@@ -162,14 +205,47 @@ const styles = StyleSheet.create({
     borderRadius: 250,
   },
   info: {
-    flexDirection: "col",
+    flexDirection: "column",
   },
-  name: {
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalName: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  modalEmail: {
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  modalLocation: {
     fontSize: 17,
-    fontWeight: "600",
+    fontWeight: "500",
+    marginBottom: 20,
   },
-  email: {
-    fontSize: 14,
-    color: "grey",
+  closeButton: {
+    backgroundColor: "#2c2c6c",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  modalImg: {
+    height: 100,
+    width: 100,
+    borderRadius: 250,
   },
 });
