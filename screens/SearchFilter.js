@@ -101,27 +101,29 @@ const SearchFilter = () => {
         </Animated.View>
       </View>
 
-      <FlatList
-        paddingHorizontal={20}
-        data={filteredData}
-        keyExtractor={(item) => item.login.uuid}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleUserPress(item)}>
-            <View style={styles.item__container}>
-              <Image
-                source={{ uri: item.picture.thumbnail }}
-                style={styles.img}
-              />
-              <View style={styles.info}>
-                <Text style={styles.name}>
-                  {item.name.first} {item.name.last}
-                </Text>
-                <Text style={styles.email}>{item.email}</Text>
+      <View style={styles.container2}>
+        <FlatList
+          paddingHorizontal={20}
+          data={filteredData}
+          keyExtractor={(item) => item.login.uuid}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleUserPress(item)}>
+              <View style={styles.item__container}>
+                <Image
+                  source={{ uri: item.picture.thumbnail }}
+                  style={styles.img}
+                />
+                <View style={styles.info}>
+                  <Text style={styles.name}>
+                    {item.name.first} {item.name.last}
+                  </Text>
+                  <Text style={styles.email}>{item.email}</Text>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
 
       <Modal
         animationType="slide"
@@ -162,8 +164,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input__container: {
-    backgroundColor: "#2c2c6c",
+    flex: 1,
+    backgroundColor: "#006494",
     padding: 20,
+  },
+  container2: {
+    flex: 4,
   },
   label: {
     fontSize: 16,

@@ -1,120 +1,59 @@
-import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
-  TouchableHighlight,
   View,
+  ImageBackground,
 } from "react-native";
 import React from "react";
+import Card from "../components/Card";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const AboutScreen = ({ navigation }) => {
   return (
-    <ScrollView
-      style={{
-        backgroundColor: "#fff",
-      }}
-    >
-      <SafeAreaView
-        style={{
-          flex: 1,
-          gap: 20,
-          justifyContent: "center",
-          alignItems: "center",
-          paddingVertical: 20,
-          paddingHorizontal: 10,
-        }}
+    <ScrollView style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../assets/World_map.png")}
+        style={styles.background}
+        resizeMode="repeat"
       >
-        <View style={{ flexDirection: "row", gap: 16 }}>
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Introduction")}
-            >
-              <Text style={styles.btn__txt}>Page Intro</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>1</Text>
-          </View>
-
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Form")}
-            >
-              <Text style={styles.btn__txt}>Form Validation</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>2</Text>
-          </View>
+        <View
+          style={{
+            // backgroundColor: "rgba(255, 255, 255, 0.1)",
+            alignItems: "center",
+            paddingVertical: 20,
+            gap: 8,
+          }}
+        >
+          <Card
+            title="Form-validation"
+            content="This is a demo app"
+            demo={<Ionicons name="link" size={32} color="#fec601" />}
+            onPress={() => navigation.navigate("Form")}
+            customStyle={{ backgroundColor: "#669bbc" }}
+          />
+          <Card
+            title="OTP-Verification"
+            content="This is a demo app"
+            demo={<Ionicons name="link" size={32} color="#fec601" />}
+            customStyle={{ backgroundColor: "#669bbc" }}
+            onPress={() => navigation.navigate("OTP")}
+          />
+          <Card
+            title="Search-Bar Filter"
+            content="This is a demo app"
+            demo={<Ionicons name="link" size={32} color="#fec601" />}
+            customStyle={{ backgroundColor: "#669bbc" }}
+            onPress={() => navigation.navigate("Search")}
+          />
+          <Card
+            title="Animated Search-Bar"
+            content="This is a demo app"
+            demo={<Ionicons name="link" size={32} color="#fec601" />}
+            customStyle={{ backgroundColor: "#669bbc" }}
+          />
         </View>
-
-        <View style={{ flexDirection: "row", gap: 16 }}>
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("OTP")}
-            >
-              <Text style={styles.btn__txt}>OTP</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>3</Text>
-          </View>
-
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Search")}
-            >
-              <Text style={styles.btn__txt}>Search Bar</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>4</Text>
-          </View>
-        </View>
-
-        <View style={{ flexDirection: "row", gap: 16 }}>
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Form")}
-            >
-              <Text style={styles.btn__txt}>Form Validation</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>5</Text>
-          </View>
-
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Form")}
-            >
-              <Text style={styles.btn__txt}>Form Validation</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>6</Text>
-          </View>
-        </View>
-
-        <View style={{ flexDirection: "row", gap: 16 }}>
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Tabpage")}
-            >
-              <Text style={styles.btn__txt}>Form Validation</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>7</Text>
-          </View>
-
-          <View style={styles.card}>
-            <TouchableHighlight
-              style={styles.btn}
-              onPress={() => navigation.navigate("Tabpage")}
-            >
-              <Text style={styles.btn__txt}>Form Validation</Text>
-            </TouchableHighlight>
-            <Text style={styles.card__txt}>8</Text>
-          </View>
-        </View>
-        <StatusBar style="auto" />
-      </SafeAreaView>
+      </ImageBackground>
     </ScrollView>
   );
 };
@@ -122,9 +61,10 @@ const AboutScreen = ({ navigation }) => {
 export default AboutScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  background: {
+    flex: 2,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   card__txt: {
     textAlign: "center",
@@ -138,23 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     marginHorizontal: 8,
   },
-  card: {
-    width: "45%",
-    height: 140,
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    borderColor: "#2c2c6c",
-    borderWidth: 2,
-    margin: 4,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 4,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 2,
-    // elevation: 3,
-  },
 
   btn__txt: {
     backgroundColor: "#fff",
@@ -165,4 +88,34 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
   },
+  card: {
+    backgroundColor: "#ea7317",
+    borderRadius: 8,
+    width: "90%",
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#fff",
+  },
+  // content__container: {
+  //   height: 100,
+  //   width: 100,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  // content: {
+  //   height: 140,
+  //   width: 100,
+  // },
 });

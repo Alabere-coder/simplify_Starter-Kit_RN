@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     paddingHorizontal: 20,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#bde0fe",
     justifyContent: "center",
   },
   link__btn: {

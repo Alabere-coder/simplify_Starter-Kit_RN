@@ -1,14 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const Card = ({ title, content, customStyle }) => {
+const Card = ({ title, content, customStyle, onPress, demo }) => {
   return (
-    <View style={[styles.card, customStyle]}>
-      <View style={styles.content__container}>
-        <Text style={styles.content}>{content}</Text>
-      </View>
+    <TouchableOpacity style={[styles.card, customStyle]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
-    </View>
+      <Text style={styles.content}>{content}</Text>
+      <Text style={styles.demo}>{demo}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -16,33 +15,31 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
     borderRadius: 8,
-    width: 150,
+    width: "90%",
     height: 150,
-    alignItems: "center",
-    justifyContent: "center",
     marginBottom: 20,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 4,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
     color: "#fff",
   },
-  // content__container: {
-  //   height: 100,
-  //   width: 100,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
-  // content: {
-  //   height: 140,
-  //   width: 100,
-  // },
+  content: {
+    color: "#fff",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  demo: {
+    color: "#fec601",
+    fontSize: 19,
+  },
 });

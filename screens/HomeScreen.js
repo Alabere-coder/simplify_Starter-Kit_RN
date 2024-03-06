@@ -8,7 +8,6 @@ import {
   Animated,
 } from "react-native";
 import React, { useEffect } from "react";
-import Card from "../components/Card";
 import Button from "../components/Button";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -61,6 +60,7 @@ const HomeScreen = ({ navigation }) => {
           Simplify
         </Animated.Text> */}
         <Text style={styles.logo}>Simplify</Text>
+        {/* <Text style={styles.logo}>SIMPLIFY</Text> */}
         <View style={styles.card}>
           <Text style={styles.title}>What we do:</Text>
           <View style={styles.content__container}>
@@ -88,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
               color: "#ffc300",
               width: "98%",
             }}
-            onPress={() => navigation.navigate("About")}
+            onPress={() => navigation.navigate("Content")}
             icon={
               <Ionicons name="checkmark-circle" size={32} color="#ff7b00" />
             }
@@ -109,26 +109,25 @@ const styles = StyleSheet.create({
   },
   body: {},
   topTitle: {
-    fontSize: 40,
+    fontSize: 25,
+    fontWeight: "bold",
     marginHorizontal: "auto",
     color: "#343a40",
-    marginLeft: -80,
+    margin: "auto",
     lineHeight: 60,
+    marginLeft: 45,
   },
   logo: {
     fontSize: 55,
     fontWeight: "900",
-    color: "#ffd400",
+    color: "#fec601",
     lineHeight: 60,
-    letterSpacing: 2,
-    textShadowColor: "rgba(0, 0, 0, 0.5)",
-    textShadowOffset: { width: 4, height: 8 },
-    textShadowRadius: 5,
+    // letterSpacing: 1,
+    textAlign: "center",
   },
   top: {
     flex: 1,
     backgroundColor: "#bde0fe",
-    alignItems: "center",
     zIndex: 1000,
   },
   bottom: {
@@ -162,6 +161,7 @@ const styles = StyleSheet.create({
     elevation: 7,
     position: "absolute",
     top: 140,
+    alignSelf: "center",
   },
   title: {
     fontSize: 25,
@@ -183,5 +183,6 @@ const styles = StyleSheet.create({
     color: "#ff7b00",
     fontSize: 18,
     fontWeight: "bold",
+    textDecorationLine: "underline",
   },
 });
