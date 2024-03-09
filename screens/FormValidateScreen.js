@@ -5,13 +5,15 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
   Vibration,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import Button from "../components/Button";
+import BioAuth from "../components/BioAuth";
 
 const FormValidateScreen = () => {
   const [name, setName] = useState("");
@@ -98,21 +100,16 @@ const FormValidateScreen = () => {
   };
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          transform: [
-            {
-              scale: contentScale,
-            },
-          ],
-        },
-      ]}
-    >
-      <View style={styles.elevation}>
-        <Image source={require("../assets/man.png")} style={styles.image} />
-        <Text>Email</Text>
+    <View style={styles.container}>
+      {/* <Image source={require("../assets/man.png")} style={styles.image} /> */}
+      <Text style={styles.title}>
+        <Text style={{ fontSize: 36, color: "#ffc300", fontWeight: "bold" }}>
+          A
+        </Text>
+        ISS
+      </Text>
+      <View>
+        <Text style={styles.label}>Email</Text>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -122,6 +119,9 @@ const FormValidateScreen = () => {
         {errors.email ? (
           <Text style={styles.error__message}>{errors.email}</Text>
         ) : null}
+      </View>
+      <View>
+        <Text style={styles.label}>Password</Text>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.passwordInput}
@@ -130,20 +130,23 @@ const FormValidateScreen = () => {
             onChangeText={setPassword}
             secureTextEntry={!showPassword}
           />
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.eyeIcon}
             onPress={togglePasswordVisibility}
           >
             <FontAwesomeIcon
               size={20}
-              color="#2c2c6c"
+              color="#669bbc"
               icon={showPassword ? faEye : faEyeSlash}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         {errors.password ? (
           <Text style={styles.error__message}>{errors.password}</Text>
         ) : null}
+      </View>
+      <View style={{ marginBottom: 20 }}>
+        <Text style={styles.label}>Repeat-Password</Text>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.passwordInput}
@@ -152,25 +155,36 @@ const FormValidateScreen = () => {
             onChangeText={setPassword2}
             secureTextEntry={!showPassword2}
           />
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.eyeIcon}
             onPress={togglePassword2Visibility}
           >
             <FontAwesomeIcon
               size={20}
-              color="#2c2c6c"
+              color="#669bbc"
               icon={showPassword2 ? faEye : faEyeSlash}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         {errors.password2 ? (
           <Text style={styles.error__message}>{errors.password2}</Text>
         ) : null}
-        <TouchableHighlight style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableHighlight>
       </View>
-    </Animated.View>
+      <View style={{ flexDirection: "column", alignItems: "center" }}>
+        <Button
+          title="Login"
+          buttonStyle={{
+            backgroundColor: "#669bbc",
+            color: "#ff7b00",
+            width: "85%",
+          }}
+          onPress={handleSubmit}
+        />
+        <BioAuth />
+      </View>
+      <View style={styles.design}></View>
+      <View style={styles.design2}></View>
+    </View>
   );
 };
 
@@ -178,90 +192,69 @@ export default FormValidateScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    paddingHorizontal: 20,
-    backgroundColor: "#bde0fe",
-    justifyContent: "center",
-  },
-  link__btn: {
-    flexDirection: "row",
-    gap: 8,
-  },
-  btn: {
-    backgroundColor: "maroon",
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    flex: 1,
+    backgroundColor: "white",
+    padding: 15,
+    position: "relative",
   },
   input: {
     height: 50,
-    borderColor: "#2c2c6c",
+    borderColor: "#fff",
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 10,
     borderRadius: 8,
     fontSize: 16,
+    backgroundColor: "#edf2f4",
   },
 
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 12,
-  },
-  passwordInput: {
-    flex: 1,
-    height: 50,
-    borderColor: "#2c2c6c",
-    borderWidth: 1,
     borderRadius: 8,
     fontSize: 16,
     paddingHorizontal: 10,
+    backgroundColor: "#edf2f4",
+  },
+  passwordInput: {
+    height: 50,
   },
   eyeIcon: {
-    padding: 5,
     color: "#2c2c6c",
-  },
-  button: {
-    backgroundColor: "#2c2c6c",
-    borderRadius: 8,
-    paddingVertical: 10,
-    alignItems: "center",
-    marginTop: 26,
-    marginBottom: 12,
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  error: {
-    color: "red",
-    fontSize: 20,
-    marginBottom: 12,
   },
   error__message: {
     color: "red",
     fontSize: 13,
     marginBottom: 8,
   },
-  elevation: {
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.25,
-    elevation: 12,
+  title: {
+    textAlign: "center",
+    fontSize: 30,
+    marginVertical: 15,
+    color: "#669bbc",
+  },
+  label: {
+    marginBottom: 6,
+    fontSize: 15,
   },
   design: {
-    backgroundColor: "black",
-  },
-  image: {
-    width: 150,
     height: 150,
-    alignSelf: "center",
-    marginBottom: 10,
+    width: 150,
+    backgroundColor: "#669bbc",
+    borderRadius: 250,
+    position: "absolute",
+    left: -70,
+    bottom: -70,
+  },
+  design2: {
+    height: 150,
+    width: 150,
+    backgroundColor: "#669bbc",
+    borderRadius: 250,
+    position: "absolute",
+    right: -60,
+    top: -60,
   },
 });

@@ -114,7 +114,7 @@ const SearchFilter = () => {
             visible={!!selectedUser}
             onRequestClose={closeModal}
           >
-            <View style={styles.modalContainer}>
+            <SafeAreaView style={styles.modalContainer}>
               {selectedUser && (
                 <View style={styles.modalContent}>
                   <View style={styles.user}>
@@ -161,7 +161,7 @@ const SearchFilter = () => {
                   </TouchableOpacity>
                 </View>
               )}
-            </View>
+            </SafeAreaView>
           </Modal>
         </>
       )}
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
   },
   modalContent: {
     backgroundColor: "#fff",

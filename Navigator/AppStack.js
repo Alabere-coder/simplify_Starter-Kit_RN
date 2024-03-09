@@ -18,11 +18,10 @@ export const ContentStack = () => {
         gestureEnabled: true,
         headerTitle: "",
         headerBackTitle: "Back",
-        statusBarColor: "#13274F",
         headerStyle: {
-          backgroundColor: "#669bbc",
+          backgroundColor: "#fff",
         },
-        headerTintColor: "#fff",
+        headerTintColor: "#669bbc",
         statusBarStyle: "light",
         animation: "slide_from_right",
         headerTitleStyle: {
@@ -37,7 +36,7 @@ export const ContentStack = () => {
           title: "Components",
           headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()}>
-              <Ionicons name="arrow-back" size={25} color="#fff" />
+              <Ionicons name="arrow-back" size={25} color="#669bbc" />
             </Pressable>
           ),
         })}
@@ -45,7 +44,12 @@ export const ContentStack = () => {
       <Stack.Screen
         name="Form"
         component={FormValidateScreen}
-        options={{ title: "Form Validation" }}
+        options={{
+          title: "Form Validation",
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+        }}
       />
       <Stack.Screen
         name="OTP"
