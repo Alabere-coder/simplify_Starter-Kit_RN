@@ -16,15 +16,14 @@ export default Card;
 const styles = StyleSheet.create({
   card: {
     borderRadius: 8,
-    width: "90%",
+    width: "94%",
     height: 150,
-    marginBottom: 20,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
+    shadowRadius: 2,
     elevation: 4,
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
     paddingVertical: 12,
     justifyContent: "space-between",
   },
@@ -36,10 +35,10 @@ const styles = StyleSheet.create({
   content: {
     color: "#fff",
     fontSize: 16,
-    textAlign: "center",
   },
   demo: {
     color: "#fec601",
     fontSize: 19,
+    textAlign: "right",
   },
 });

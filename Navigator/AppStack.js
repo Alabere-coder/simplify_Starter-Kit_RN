@@ -14,31 +14,33 @@ export const ContentStack = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation }) => ({
-        headerRight: () => (
-          <Pressable onPress={() => navigation.navigate("setting")}>
-            <Ionicons
-              name="settings-outline"
-              size={30}
-              color="#fff"
-              style={{ marginRight: 15 }}
-            />
-          </Pressable>
-        ),
-
+        statusBarAnimation: "slide",
+        gestureEnabled: true,
+        headerTitle: "",
+        headerBackTitle: "Back",
         statusBarColor: "#13274F",
         headerStyle: {
           backgroundColor: "#669bbc",
         },
         headerTintColor: "#fff",
+        statusBarStyle: "light",
+        animation: "slide_from_right",
         headerTitleStyle: {
-          fontSize: 25,
+          fontSize: 20,
         },
       })}
     >
       <Stack.Screen
         name="About"
         component={AboutScreen}
-        options={{ title: "Components" }}
+        options={({ navigation }) => ({
+          title: "Components",
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <Ionicons name="arrow-back" size={25} color="#fff" />
+            </Pressable>
+          ),
+        })}
       />
       <Stack.Screen
         name="Form"
@@ -53,7 +55,10 @@ export const ContentStack = () => {
       <Stack.Screen
         name="Search"
         component={SearchFilter}
-        options={{ title: "Search Bar" }}
+        options={{
+          //   headerBackTitle: "User Filter",
+          title: "Search Bar",
+        }}
       />
       <Stack.Screen
         name="setting"

@@ -1,12 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-  Animated,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Animated } from "react-native";
 import React, { useEffect } from "react";
 import Button from "../components/Button";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -14,53 +7,11 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const HomeScreen = ({ navigation }) => {
   const theme = theme === "dark";
 
-  const bounceValue = new Animated.Value(0);
-
-  const startAnimation = () => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.spring(bounceValue, {
-          toValue: 8,
-          friction: 2,
-          useNativeDriver: true,
-        }),
-        Animated.spring(bounceValue, {
-          toValue: -2,
-          friction: 4,
-          useNativeDriver: true,
-        }),
-      ]),
-      { iterations: -1 }
-    ).start();
-  };
-
-  useEffect(() => {
-    startAnimation();
-  }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <Text style={styles.topTitle}>Welcome to:</Text>
-        {/* <Animated.Text
-          style={[
-            styles.logo,
-            {
-              transform: [
-                {
-                  translateY: bounceValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 10],
-                  }),
-                },
-              ],
-            },
-          ]}
-        >
-          Simplify
-        </Animated.Text> */}
         <Text style={styles.logo}>Simplify</Text>
-        {/* <Text style={styles.logo}>SIMPLIFY</Text> */}
         <View style={styles.card}>
           <Text style={styles.title}>What we do:</Text>
           <View style={styles.content__container}>
@@ -69,32 +20,32 @@ const HomeScreen = ({ navigation }) => {
               Project.
             </Text>
           </View>
-          <Text style={styles.more}>Explore</Text>
+          <Text style={styles.more}>
+            <Ionicons
+              name="arrow-forward-circle-outline"
+              size={32}
+              color="#ff7b00"
+            />
+          </Text>
         </View>
       </View>
-      <ImageBackground
-        source={require("../assets/World_map.png")}
-        style={styles.background}
-        resizeMode="cover"
-      >
-        <View style={styles.bottom}>
-          <Image source={require("../assets/imgo.png")} style={styles.image} />
-          <Button
-            title="Let's get Started"
-            buttonStyle={{
-              backgroundColor: "#669bbc",
-              position: "absolute",
-              bottom: 0,
-              color: "#ffc300",
-              width: "98%",
-            }}
-            onPress={() => navigation.navigate("Content")}
-            icon={
-              <Ionicons name="checkmark-circle" size={32} color="#ff7b00" />
-            }
-          />
-        </View>
-      </ImageBackground>
+
+      <View style={styles.bottom}>
+        <Image source={require("../assets/team.png")} style={styles.image} />
+        <Button
+          title="Let's get Started"
+          buttonStyle={{
+            backgroundColor: "#669bbc",
+            position: "absolute",
+            bottom: 4,
+            color: "#ff7b00",
+            width: "100%",
+          }}
+          onPress={() => navigation.navigate("Content")}
+          icon={<Ionicons name="arrow-forward" size={32} color="#ff7b00" />}
+        />
+      </View>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -115,50 +66,45 @@ const styles = StyleSheet.create({
     color: "#343a40",
     margin: "auto",
     lineHeight: 60,
-    marginLeft: 45,
   },
   logo: {
     fontSize: 55,
     fontWeight: "900",
     color: "#fec601",
     lineHeight: 60,
-    // letterSpacing: 1,
-    textAlign: "center",
   },
   top: {
     flex: 1,
     backgroundColor: "#bde0fe",
-    zIndex: 1000,
+    zIndex: 1,
+    paddingHorizontal: 20,
   },
   bottom: {
     flex: 2,
     backgroundColor: "rgba(255, 255, 255, 0.3)",
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 20,
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 340,
+    height: 320,
     alignSelf: "center",
     justifyContent: "center",
     marginBottom: 10,
   },
-  background: {
-    flex: 2,
-    resizeMode: "cover",
-    justifyContent: "center",
-  },
   card: {
     backgroundColor: "#fff",
     borderRadius: 8,
-    width: "84%",
+    width: "100%",
     height: 160,
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
     shadowColor: "#000",
     shadowOpacity: 0.2,
-    shadowOffset: { width: 2, height: 4 },
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
-    elevation: 7,
+    elevation: 2,
     position: "absolute",
     top: 140,
     alignSelf: "center",
@@ -169,20 +115,16 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 12,
   },
-  content__container: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  content__container: {},
   content: {
     fontSize: 16,
     color: "#6c757d",
   },
   more: {
-    marginTop: 24,
+    marginTop: 18,
     textAlign: "right",
     color: "#ff7b00",
     fontSize: 18,
     fontWeight: "bold",
-    textDecorationLine: "underline",
   },
 });

@@ -19,7 +19,7 @@ export default Button;
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#2E5090",
-    padding: 20,
+    padding: 12,
     borderRadius: 20,
     flexDirection: "row",
     gap: 20,

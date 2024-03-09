@@ -15,19 +15,13 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator
         screenOptions={({ navigation }) => ({
-          headerRight: () => (
-            <Pressable onPress={() => navigation.navigate("setting")}>
-              <Ionicons
-                name="settings-outline"
-                size={30}
-                color="#fff"
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          drawerActiveTintColor: "#fff",
+          drawerActiveBackgroundColor: "#669bbc",
+          drawerInactiveTintColor: "#8d99ae",
+          headerTitle: "",
           statusBarColor: "#13274F",
           headerStyle: {
-            backgroundColor: "#669bbc",
+            backgroundColor: "#bde0fe",
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
