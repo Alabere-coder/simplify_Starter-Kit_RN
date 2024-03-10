@@ -182,8 +182,13 @@ const FormValidateScreen = () => {
         />
         <BioAuth />
       </View>
-      <View style={styles.design}></View>
-      <View style={styles.design2}></View>
+
+      <View style={styles.design}>
+        <View style={styles.design1}></View>
+        <View style={styles.design2}></View>
+        <View style={styles.design3}></View>
+        <View style={styles.design4}></View>
+      </View>
     </View>
   );
 };
@@ -215,14 +220,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderRadius: 8,
     fontSize: 16,
-    paddingHorizontal: 10,
+
     backgroundColor: "#edf2f4",
   },
   passwordInput: {
     height: 50,
+    width: "90%",
+    paddingHorizontal: 10,
   },
   eyeIcon: {
     color: "#2c2c6c",
+    marginRight: 10,
   },
   error__message: {
     color: "red",
@@ -240,21 +248,44 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   design: {
-    height: 150,
-    width: 150,
+    height: 170,
+    width: 170,
     backgroundColor: "#669bbc",
     borderRadius: 250,
     position: "absolute",
-    left: -70,
-    bottom: -70,
+    justifyContent: "center",
+    alignItems: "center",
+    right: -80,
+    top: -80,
+  },
+  design1: {
+    height: 150,
+    width: 150,
+    backgroundColor: "#fff",
+    borderRadius: 250,
+    position: "absolute",
+    // right: -60,
+    // top: -60,
   },
   design2: {
-    height: 150,
-    width: 150,
+    height: 120,
+    width: 120,
+    backgroundColor: "#ffc300",
+    borderRadius: 250,
+    position: "absolute",
+  },
+  design3: {
+    height: 100,
+    width: 100,
+    backgroundColor: "#fff",
+    borderRadius: 250,
+    position: "absolute",
+  },
+  design4: {
+    height: 70,
+    width: 70,
     backgroundColor: "#669bbc",
     borderRadius: 250,
     position: "absolute",
-    right: -60,
-    top: -60,
   },
 });
