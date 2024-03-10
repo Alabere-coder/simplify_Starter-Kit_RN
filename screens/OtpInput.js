@@ -6,17 +6,19 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
+  Modal,
+  SafeAreaView,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import LottieView from "lottie-react-native";
 
-const OTPInput = ({ length = 4, onComplete }) => {
+const OTPInput = ({ length = 4 }) => {
   const [otp, setOTP] = useState(new Array(length).fill(""));
   const otpTextInput = useRef([]);
   const [isValid, setIsValid] = useState(false);
-
   const [resendStatus, setResendStatus] = useState("Resend");
   const [resendTimer, setResendTimer] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     setIsValid(otp.every((digit) => digit !== ""));
@@ -31,42 +33,39 @@ const OTPInput = ({ length = 4, onComplete }) => {
     newOTP[index] = value;
     setOTP(newOTP);
 
-    // Move to the next input field
     if (value && index < length - 1) {
       otpTextInput.current[index + 1].focus();
     }
 
-    // When the last input field is filled, call onComplete callback
     if (index === length - 1 && value) {
-      //   onComplete(newOTP.join(""));
     }
   };
 
   const handleOnKeyPress = (index, key) => {
-    // Move to the previous input field on backspace if current field is empty
     if (key === "Backspace" && !otp[index] && index > 0) {
       otpTextInput.current[index - 1].focus();
     }
   };
 
   const handleSubmit = () => {
-    onComplete(otp.join(""));
+    setModalVisible(true);
+    setOTP(new Array(length).fill(""));
+    if (otpTextInput.current[0]) {
+      otpTextInput.current[0].focus();
+    }
   };
 
   const handleResend = () => {
-    // Logic to resend OTP goes here
     setResendStatus("Resending...");
-    setResendTimer(60); // Set timer for 60 seconds
+    setResendTimer(60);
   };
 
   useEffect(() => {
-    // Start countdown when resendTimer is set
     if (resendTimer !== null && resendTimer > 0) {
       const intervalId = setInterval(() => {
         setResendTimer((prevTimer) => prevTimer - 1);
       }, 1000);
 
-      // Clear interval when timer reaches 0
       return () => clearInterval(intervalId);
     } else if (resendTimer === 0) {
       setResendStatus("Resend");
@@ -76,11 +75,11 @@ const OTPInput = ({ length = 4, onComplete }) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.top}>
-        <View style={styles.icon__bg2}>
-          <View style={styles.icon__bg}>
-            <Ionicons name="lock-open" size={110} color="white" />
-          </View>
-        </View>
+        <LottieView
+          source={require("../assets/lock2.json")}
+          autoPlay
+          style={{ width: 170, height: 170, borderRadius: 100 }}
+        />
         <Text style={styles.title}>Account Verification</Text>
         <Text style={styles.info}>
           Enter the 4-digit code sent to{" "}
@@ -106,6 +105,7 @@ const OTPInput = ({ length = 4, onComplete }) => {
               accessibilityLabel={`Digit ${index + 1}`}
               accessibilityRole="keyboardkey"
               accessibilityHint="Enter a digit"
+              secureTextEntry={true}
             />
           ))}
       </View>
@@ -124,11 +124,37 @@ const OTPInput = ({ length = 4, onComplete }) => {
         disabled={!isValid}
         style={[
           styles.verifyButton,
-          { backgroundColor: isValid ? "#2c2c6c" : "grey" },
+          { backgroundColor: isValid ? "#669bbc" : "#adb5bd" },
         ]}
       >
         <Text style={styles.txtButton}>Verify OTP</Text>
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <LottieView
+              source={require("../assets/check2.json")}
+              autoPlay
+              style={{ width: 120, height: 120 }}
+            />
+            <Text style={styles.welcomeText}>Code Verified</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </Modal>
     </KeyboardAvoidingView>
   );
 };
@@ -137,26 +163,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: "#fff",
   },
   top: {
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon__bg: {
-    width: 190,
-    height: 190,
-    backgroundColor: "#2c2c6c",
-    borderRadius: 250,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon__bg2: {
-    width: 220,
-    height: 220,
-    borderWidth: 8,
-    borderColor: "#2c2c6c",
-    borderRadius: 250,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -169,8 +179,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     fontWeight: "bold",
-    color: "indigo",
-    padding: 10,
+    color: "#669bbc",
+    padding: 15,
   },
   info: {
     color: "gray",
@@ -185,14 +195,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 20,
+    paddingVertical: 20,
     gap: 8,
   },
   input: {
     height: 50,
     width: 50,
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 5,
+    borderColor: "#adb5bd",
     textAlign: "center",
     fontSize: 20,
   },
@@ -217,6 +228,40 @@ const styles = StyleSheet.create({
   resendText: {
     color: "blue",
     textDecorationLine: "underline",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    paddingHorizontal: 15,
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    gap: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  resultText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  closeButton: {
+    backgroundColor: "#669bbc",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignSelf: "center",
+  },
+  closeButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
+  welcomeText: {
+    fontSize: 32,
   },
 });
 

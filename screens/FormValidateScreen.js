@@ -188,6 +188,8 @@ const FormValidateScreen = () => {
         <View style={styles.design2}></View>
         <View style={styles.design3}></View>
         <View style={styles.design4}></View>
+        <View style={styles.design5}></View>
+        <View style={styles.design6}></View>
       </View>
     </View>
   );
@@ -264,8 +266,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 250,
     position: "absolute",
-    // right: -60,
-    // top: -60,
   },
   design2: {
     height: 120,
@@ -285,6 +285,20 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     backgroundColor: "#669bbc",
+    borderRadius: 250,
+    position: "absolute",
+  },
+  design5: {
+    height: 50,
+    width: 50,
+    backgroundColor: "#fff",
+    borderRadius: 250,
+    position: "absolute",
+  },
+  design6: {
+    height: 25,
+    width: 25,
+    backgroundColor: "#ffc300",
     borderRadius: 250,
     position: "absolute",
   },

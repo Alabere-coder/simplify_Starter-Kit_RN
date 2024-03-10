@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import * as LocalAuthentication from "expo-local-authentication";
-import Button from "./Button";
 import LottieView from "lottie-react-native";
-import check from "../assets/check.json";
 
 const BioAuth = () => {
   const [authenticationResult, setAuthenticationResult] = useState("");
